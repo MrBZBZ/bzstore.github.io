@@ -1,0 +1,39 @@
+
+PHP >= 8.0
+Mysql >= 5.6
+安装说明：
+Apache伪静态规则：无需配置，规则就是程序根目录的.htaccess文件
+Nginx伪静态规则：
+
+location / {
+    if (!-e $request_filename){
+            rewrite ^(.*)$ /index.php?s=$1 last; break;
+    }
+}
+Windows IIS 伪静态规则：
+
+<rules>
+  <rule name="acg_rewrite" stopProcessing="true">
+      <match url="^(.*)$"/>
+      <conditions logicalGrouping="MatchAll">
+          <add input="{HTTP_HOST}" pattern="^(.*)$"/>
+          <add input="{REQUEST_FILENAME}" matchType="IsFile" negate="true"/>
+          <add input="{REQUEST_FILENAME}" matchType="IsDirectory" negate="true"/>
+      </conditions>
+      <action type="Rewrite" url="index.php?s={R:1}"/>
+  </rule>
+</rules>
+配置完伪静态后，访问你的网站首页，即可进行安装。
+安装完成后，后台地址是：https://你的域名/admin
+----------------
+
+搭建网站需要用到的平台:  http://host.bin00.cn
+
+----------------
+如有疑问加QQ群：422505146   （欢迎加入QQ群交流学习鸭~~）
+
+彬彬QQ：2426414134
+-----------------
+小彬技术官网 http://www.bin00.cn/
+
+小彬技术博客 http://blog.bin00.cn/
